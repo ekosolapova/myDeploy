@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Build-Date: 2022-08-23T12:00:22.299123+02:00
+Created-By: OpenL WebStudio v.5.26.1
+Implementation-Title: Tutorial 5 - Introduction to TBasic Tables
+Build-Branch: master
+Build-Number: 03c23bcd3feb1a287de6d0bf2e4001de01748184
+Implementation-Version: DEFAULT-2022-08-23_12-00-17
+Built-By: DEFAULT
+
