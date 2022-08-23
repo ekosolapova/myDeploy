@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Build-Date: 2022-08-23T12:02:55.134669+02:00
+Created-By: OpenL WebStudio v.5.26.2-SNAPSHOT
+Implementation-Title: Tutorial 6 - Introduction to Spreadsheet Tables
+Build-Branch: master
+Build-Number: 37e5cf7f77d2285b17e40ca027f8b04bf11861a5
+Implementation-Version: DEFAULT-2022-08-23_12-02-51
+Built-By: DEFAULT
+
