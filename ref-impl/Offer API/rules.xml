@@ -1,0 +1,22 @@
+<project>
+    <name>Offer API</name>
+    <comment></comment>
+    <modules>
+        <module>
+            <name></name>
+            <rules-root path="rules/*.xlsx"/>
+            <method-filter>
+                <includes>
+                    <value>.+ Behavior\(.+\)</value>
+                </includes>
+            </method-filter>
+        </module>
+    </modules>
+    <classpath>
+        <entry path="groovy"/>
+    </classpath>
+    <openapi>
+        <path>openapi.json</path>
+        <mode>RECONCILIATION</mode>
+    </openapi>
+</project>
