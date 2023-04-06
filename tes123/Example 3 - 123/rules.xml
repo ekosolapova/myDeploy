@@ -1,5 +1,6 @@
 <project>
-    <name>Example 3 - 123</name>
+    <name>Example 3 - 1231</name>
+    <comment>4444</comment>
     <modules>
         <module>
             <name>AutoPolicyCalculation</name>
@@ -10,12 +11,12 @@
             <rules-root path="AutoPolicyTests.xlsx"/>
         </module>
         <module>
-            <name>Tutorial6 - Intro to Spreadsheet Tables</name>
-            <rules-root path="RUN123/Tutorial6 - Intro to Spreadsheet Tables.xlsx"/>
-        </module>
-        <module>
             <name>TableToRun</name>
             <rules-root path="TEST123/TableToRun.xlsx"/>
+        </module>
+        <module>
+            <name>Tutorial6 - Intro to Spreadsheet Tables</name>
+            <rules-root path="RUN123/Tutorial6 - Intro to Spreadsheet Tables.xlsx"/>
         </module>
     </modules>
 </project>
