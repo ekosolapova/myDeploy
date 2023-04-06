@@ -1,0 +1,21 @@
+<project>
+    <name>Example 3 - 123</name>
+    <modules>
+        <module>
+            <name>AutoPolicyCalculation</name>
+            <rules-root path="AutoPolicyCalculation.xlsx"/>
+        </module>
+        <module>
+            <name>AutoPolicyTests</name>
+            <rules-root path="AutoPolicyTests.xlsx"/>
+        </module>
+        <module>
+            <name>Tutorial6 - Intro to Spreadsheet Tables</name>
+            <rules-root path="RUN123/Tutorial6 - Intro to Spreadsheet Tables.xlsx"/>
+        </module>
+        <module>
+            <name>TableToRun</name>
+            <rules-root path="TEST123/TableToRun.xlsx"/>
+        </module>
+    </modules>
+</project>
