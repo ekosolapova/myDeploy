@@ -1,0 +1,33 @@
+<rules-deploy>
+  <isProvideRuntimeContext>false</isProvideRuntimeContext>
+  <isProvideVariations>false</isProvideVariations>
+  <serviceName>acc-master-offer</serviceName>
+  <publishers>
+    <publisher>RESTFUL</publisher>
+  </publishers>
+  <interceptingTemplateClassName></interceptingTemplateClassName>
+  <annotationTemplateClassName></annotationTemplateClassName>
+  <serviceClass></serviceClass>
+  <rmiServiceClass></rmiServiceClass>
+  <url>acc-master-offer</url>
+  <version></version>
+  <groups></groups>
+  <configuration>
+    <entry>
+      <string>jackson.serializationInclusion</string>
+      <string>NON_NULL</string>
+    </entry>
+    <entry>
+      <string>jackson.defaultTypingMode</string>
+      <string>DISABLED</string>
+    </entry>
+    <entry>
+      <string>jackson.defaultDateFormat</string>
+      <string>yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;</string>
+    </entry>
+    <entry>
+      <string>jackson.caseInsensitiveProperties</string>
+      <string>true</string>
+    </entry>
+  </configuration>
+</rules-deploy>
