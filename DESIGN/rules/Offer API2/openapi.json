@@ -1,0 +1,770 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "unknown",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": ".",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/Behavior": {
+      "post": {
+        "summary": "BehaviorResponse Behavior(BehaviorRequest)",
+        "description": "Rules method: org.openl.generated.beans.BehaviorResponse Behavior(org.openl.generated.beans.BehaviorRequest behaviorRequest)",
+        "operationId": "Behavior",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BehaviorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "422": {
+            "description": "Custom user errors in rules or validation errors in input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/JAXRSUserErrorResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/JAXRSErrorResponse"
+                    }
+                  ]
+                },
+                "examples": {
+                  "Example 1": {
+                    "description": "Example 1",
+                    "value": {
+                      "message": "Some message",
+                      "type": "USER_ERROR"
+                    }
+                  },
+                  "Example 2": {
+                    "description": "Example 2",
+                    "value": {
+                      "message": "Some message",
+                      "code": "code.example",
+                      "type": "USER_ERROR"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request format e.g. missing required field, unparseable JSON value, etc.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JAXRSErrorResponse"
+                },
+                "example": {
+                  "message": "Cannot parse 'bar' to JSON",
+                  "type": "BAD_REQUEST"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server errors e.g. compilation or parsing errors, runtime exceptions, etc.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JAXRSErrorResponse"
+                },
+                "example": {
+                  "message": "Failed to load lazy method.",
+                  "type": "COMPILATION"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Successful operation"
+          },
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BehaviorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "JAXRSUserErrorResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "JAXRSErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "USER_ERROR",
+              "RULES_RUNTIME",
+              "COMPILATION",
+              "SYSTEM",
+              "BAD_REQUEST",
+              "VALIDATION"
+            ]
+          }
+        }
+      },
+      "ApplicabilityBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Behavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "applicabilityType": {
+                "type": "string"
+              },
+              "cardinality": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "AttributeBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Behavior"
+          }
+        ]
+      },
+      "AttributeValidationBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "level": {
+                "type": "string",
+                "default": "Error"
+              },
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "AvailabilityBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeValidationBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "availabilityType": {
+                "type": "string"
+              },
+              "availableValue": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "Behavior": {
+        "required": [
+          "@class"
+        ],
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string"
+          },
+          "behaviorType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "entityName": {
+            "type": "string"
+          },
+          "discriminators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Discriminator"
+            }
+          },
+          "attributeName": {
+            "type": "string"
+          },
+          "isIndependentFromDimensions": {
+            "type": "boolean"
+          },
+          "dimensionNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataItem"
+            }
+          },
+          "@class": {
+            "type": "string"
+          }
+        },
+        "discriminator": {
+          "propertyName": "@class"
+        }
+      },
+      "BehaviorResponse": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "BehaviorResponse"
+          },
+          "behaviors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Behavior"
+            }
+          },
+          "validationResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationResult"
+            }
+          }
+        }
+      },
+      "CategoryBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Behavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "DataItem": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "DataItem"
+          },
+          "id": {
+            "type": "string"
+          },
+          "entityName": {
+            "type": "string"
+          },
+          "attributeName": {
+            "type": "string"
+          },
+          "attributeValue": {
+            "$ref": "#/components/schemas/Value"
+          }
+        }
+      },
+      "DefaultValueBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "defaultValue": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "Discriminator": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "Discriminator"
+          },
+          "attributeName": {
+            "type": "string"
+          },
+          "attributeValue": {
+            "$ref": "#/components/schemas/Expr"
+          }
+        }
+      },
+      "EligibilityBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eligiblityListItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EligibilityListItem"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "EligibilityListItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "EnabledBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "Expr": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "Expr"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Value"
+          }
+        }
+      },
+      "MandatoryBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeValidationBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "mandatory": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "MinMaxBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeValidationBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "min": {
+                "$ref": "#/components/schemas/Expr"
+              },
+              "max": {
+                "$ref": "#/components/schemas/Expr"
+              },
+              "increment": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "Money": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "Money"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "refresh": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "RelationshipBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Behavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "linkedEntityName": {
+                "type": "string"
+              },
+              "relationshipType": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ResetValueBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "resetValue": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "ValidationResult": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "ValidationResult"
+          },
+          "id": {
+            "type": "string"
+          },
+          "entityName": {
+            "type": "string"
+          },
+          "attributeName": {
+            "type": "string"
+          },
+          "undefined": {
+            "type": "boolean"
+          },
+          "level": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Value": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "Value"
+          },
+          "valueType": {
+            "type": "string"
+          },
+          "booleanValue": {
+            "type": "boolean"
+          },
+          "stringValue": {
+            "type": "string"
+          },
+          "integerValue": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numberValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "moneyValue": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "decimalValue": {
+            "type": "number"
+          },
+          "dateValue": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "datetimeValue": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "booleanMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            }
+          },
+          "stringMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "integerMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "numberMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "moneyMultiValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Money"
+            }
+          },
+          "decimalMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "dateMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "datetimeMultiValues": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      },
+      "ValueListBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeValidationBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "valueListItems": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ValueListItem"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ValueListItem": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "ValueListItem"
+          },
+          "itemValue": {
+            "$ref": "#/components/schemas/Value"
+          },
+          "label": {
+            "type": "string"
+          },
+          "order": {
+            "$ref": "#/components/schemas/Expr"
+          },
+          "visible": {
+            "$ref": "#/components/schemas/Expr"
+          },
+          "enabled": {
+            "$ref": "#/components/schemas/Expr"
+          }
+        }
+      },
+      "VisibleBehavior": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AttributeBehavior"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "visible": {
+                "$ref": "#/components/schemas/Expr"
+              }
+            }
+          }
+        ]
+      },
+      "BehaviorRequest": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "BehaviorRequest"
+          },
+          "effectiveDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "scoped": {
+            "type": "boolean",
+            "default": false
+          },
+          "behaviorTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validationTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataItem"
+            }
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataItem"
+            }
+          }
+        }
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string",
+            "default": "Filter"
+          },
+          "entityName": {
+            "type": "string"
+          },
+          "attributeName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
