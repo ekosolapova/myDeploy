@@ -22,7 +22,7 @@
     </classpath>
     <dependencies>
         <dependency>
-            <name>Offer API</name>
+            <name>Offer API2</name>
             <autoIncluded>true</autoIncluded>
         </dependency>
     </dependencies>
