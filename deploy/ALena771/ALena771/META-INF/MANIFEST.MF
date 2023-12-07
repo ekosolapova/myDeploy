@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Build-Date: 2023-12-07T16:50:59.322584+01:00
+Created-By: OpenL WebStudio v.5.27.3-SNAPSHOT
+Implementation-Title: ALena771
+Build-Number: 2023-12-07T15:50:16.1860014Z
+Implementation-Version: DEFAULT-2023-12-07_16-50-15
+Built-By: DEFAULT
+
