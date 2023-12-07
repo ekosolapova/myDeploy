@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Build-Date: 2023-12-07T16:45:14.029146+01:00
+Created-By: OpenL WebStudio v.5.27.1
+Implementation-Title: ExCopy
+Build-Number: 2023-12-07T15:44:02.5008340Z
+Implementation-Version: DEFAULT-2023-12-07_16-44-02
+Built-By: DEFAULT
+
